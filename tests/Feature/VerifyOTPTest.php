@@ -13,15 +13,16 @@ class VerifyOTPTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function submitAndVerifyOTP()
     {
-        $this->withExceptionHandling();
-        $user = factory(User::class)->create();
-        $this->actingAs($user);
+        // $this->withExceptionHandling();
+        $this->logInUser();
+        // $user = factory(User::class)->create();
+        // $this->actingAs($user);
         // $otp = rand(100000, 999999);
         // Cache::put(['OTP' => $   otp, now()->addSeconds(20)]);
         $otp = auth()->user()->cacheOTP();
-        $this->post('/verifyOTP', ['OTP' => $otp])->assertStatus(201);
+        $this->post('/verifyOTP', [auth()->user()->otpKey() => $otp])->assertStatus(201);
         $this->assertDatabaseHas('users', ['is_verified' => true]);
     }
 }

@@ -42,11 +42,30 @@ class EmailTest extends TestCase
 
         Mail::fake();
         $user = factory(User::class)->create();
-        $password = 'password';
+        $password = 'password1';
         // $req = $this->post('/login', ['email' => $user->email, 'password' => $password]);
         $this->post('/login', ['email' => $user->email, 'password' => $password]);
         // $req->assertRedirect('/');
-        Mail::assertSent(OTPMail::class);
+        Mail::assertNotSent(OTPMail::class);
+        // $this->assertNotNull($user->otp());
+
+    }
+
+    /**
+     * A basic feature test example.
+     *
+     * @test
+     *
+     * @return void
+     */
+    public function cacheUserOTP()
+    {
+        $this->withExceptionHandling();
+
+        $user = factory(User::class)->create();
+        $password = 'password';
+        $this->post('/login', ['email' => $user->email, 'password' => $password]);
+        $this->assertNotNull($user->otp());
 
     }
 }

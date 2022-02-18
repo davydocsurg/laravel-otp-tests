@@ -39,11 +39,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function otp()
+    {
+        return Cache::get($this->otpKey());
+    }
+
+    public function otpKey()
+    {
+        return "OTP_for_{$this->id}";
+    }
+
     public function cacheOTP()
     {
         $otp = rand(100000, 999999);
         // dd($otp);
-        Cache::put(['OTP' => $otp, now()->addSeconds(20)]);
+        Cache::put([$this->otpKey() => $otp], now()->addSeconds(20));
         return $otp;
     }
 

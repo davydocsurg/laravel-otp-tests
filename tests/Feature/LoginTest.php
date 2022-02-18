@@ -18,9 +18,9 @@ class LoginTest extends TestCase
      */
     public function verifyBeforeLogin()
     {
-        $this->loginInUser();
+        $this->logInUser();
         // $this->get('/home');
-        // $this->get('/home')->assertRedirect('/');
+        $this->get('/home')->assertRedirect('/');
     }
 
     /**
@@ -30,7 +30,7 @@ class LoginTest extends TestCase
      */
     public function loginVerifiedUser()
     {
-        $this->loginInUser(['is_verified' => true]);
+        $this->logInUser(['is_verified' => true]);
         $this->get('/home')->assertStatus(200);
     }
 

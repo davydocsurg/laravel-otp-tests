@@ -15,7 +15,7 @@ abstract class TestCase extends BaseTestCase
     //     $this->withExceptionHandling();
     // }
 
-    public function loginInUser($args = null)
+    public function logInUser($args = [])
     {
         $user = factory(User::class)->create($args);
         $this->actingAs($user);
