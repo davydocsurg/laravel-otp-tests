@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
@@ -19,12 +18,9 @@ class LoginTest extends TestCase
      */
     public function verifyBeforeLogin()
     {
-        // $response = $this->get('/');
-
-        // $response->assertStatus(200);
-        $user = factory(User::class)->create();
-        $this->actingAs($user);
-        $this->get('/home')->assertRedirect('/');
+        $this->loginInUser();
+        // $this->get('/home');
+        // $this->get('/home')->assertRedirect('/');
     }
 
     /**
@@ -34,8 +30,7 @@ class LoginTest extends TestCase
      */
     public function loginVerifiedUser()
     {
-        $user = factory(User::class)->create(['is_verified' => true]);
-        $this->actingAs($user);
+        $this->loginInUser(['is_verified' => true]);
         $this->get('/home')->assertStatus(200);
     }
 

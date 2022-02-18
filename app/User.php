@@ -3,10 +3,10 @@
 namespace App;
 
 use App\Mail\OTPMail;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Mail;
 
 class User extends Authenticatable
 {
@@ -44,10 +44,12 @@ class User extends Authenticatable
         $otp = rand(100000, 999999);
         // dd($otp);
         Cache::put(['OTP' => $otp, now()->addSeconds(20)]);
+        return $otp;
     }
 
     public function sendOTP()
     {
-        Mail::to('dellivaseges@gmail.com')->send(new OTPMail($this->otp));
+
+        Mail::to('dellivaseges@gmail.com')->send(new OTPMail($this->cacheOTP()));
     }
 }
