@@ -29,6 +29,6 @@ class OTPMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('OTPMail')->with(['OTP' => $this->otp]);
+        return $this->markdown('OTPMail')->with(['otp' => $this->otp]);
     }
 }

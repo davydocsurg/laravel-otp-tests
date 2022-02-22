@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'is_verified',
     ];
 
     /**
@@ -41,19 +41,21 @@ class User extends Authenticatable
 
     public function otp()
     {
-        return Cache::get($this->otpKey());
+        // return $this->cacheOTP();
+        return $this->otpKey();
     }
 
     public function otpKey()
     {
-        return "OTP_for_{$this->id}";
+        $otpKey = "otp_" . $this->id;
+        return $otpKey;
     }
 
     public function cacheOTP()
     {
         $otp = rand(100000, 999999);
         // dd($otp);
-        Cache::put([$this->otpKey() => $otp], now()->addSeconds(20));
+        cache([$this->otpKey() => $otp], now()->addMinutes(20));
         return $otp;
     }
 

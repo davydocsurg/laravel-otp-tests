@@ -35,6 +35,8 @@ class VerifyOTPTest extends TestCase
     public function navigateToOTPVerificationPage()
     {
         $this->logInUser();
-        $this->get('/verifyOTP')->assertStatus(200);
+        $this->get('/verifyOTP')
+            ->assertStatus(200)
+            ->assertSee('enter otp');
     }
 }

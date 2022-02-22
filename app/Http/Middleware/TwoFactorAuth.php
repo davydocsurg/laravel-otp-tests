@@ -19,6 +19,6 @@ class TwoFactorAuth
             return $next($request);
         }
 
-        return redirect()->route('welcome');
+        return redirect()->route('otpPage');
     }
 }
