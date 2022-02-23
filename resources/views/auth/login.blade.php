@@ -64,8 +64,7 @@
                                     </div>
                                     <div class="col-lg-2">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="otp_via" id="sms"
-                                                value="sms">
+                                            <input class="form-check-input" type="radio" name="via" id="sms" value="sms">
 
                                             <label class="form-check-label text-dark font-weight-bold" for="sms">
                                                 {{ __('SMS') }}
@@ -74,8 +73,8 @@
                                     </div>
                                     <div class="col-lg-1">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="otp_via" id="email-otp"
-                                                value="email-otp">
+                                            <input class="form-check-input" type="radio" name="via" id="email-otp"
+                                                value="email-otp" checked>
 
                                             <label class="form-check-label text-dark font-weight-bold" for="email-otp">
                                                 {{ __('E-Mail') }}

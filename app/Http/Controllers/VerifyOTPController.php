@@ -56,4 +56,22 @@ class VerifyOTPController extends Controller
     {
         return view('auth.otp.verify');
     }
+
+    public function resendOTP(Request $request)
+    {
+        // $validateNewOTP = $this->resendOTPValidation($request);
+
+        // // Run validation
+        // if ($validateNewOTP->fails()) {
+        //     return response()->json([
+        //         'success' => false,
+        //         'message' => $validateNewOTP->errors(),
+        //         'status' => 400,
+        //     ]);
+        // }
+
+        auth()->user()->sendOTP($request->via);
+
+    }
+
 }

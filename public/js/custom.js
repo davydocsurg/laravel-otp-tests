@@ -63,9 +63,14 @@ function goPost(url, data) {
     });
 }
 
-// Handle form error
-function handleErr(err) {
-    toastr.error("Please check your credentials and try again");
+// Handle handleOTPResend error
+function handleOTPResendErr(err) {
+    toastr.error(" Oops, something went wrong. Try again.");
+}
+
+// Handle handleOTPResend success
+function handleOTPResendSuccess(err) {
+    toastr.success(" New OTP sent! ");
 }
 
 // Handle form error

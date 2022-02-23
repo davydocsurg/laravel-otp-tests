@@ -44,7 +44,7 @@ class LoginController extends Controller
         );
 
         if ($req) {
-            auth()->user()->sendOTP($request->otp_via);
+            auth()->user()->sendOTP($request->via);
         }
 
         return $req;

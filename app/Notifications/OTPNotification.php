@@ -5,10 +5,11 @@ namespace App\Notifications;
 use Bitfumes\KarixNotificationChannel\KarixChannel;
 use Bitfumes\KarixNotificationChannel\KarixMessage;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class OTPNotification extends Notification
+class OTPNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -33,7 +34,7 @@ class OTPNotification extends Notification
      */
     public function via($notifiable)
     {
-        return $this->otp == 'sms' ? [KarixChannel::class] : ['mail'];
+        return $this->via == 'sms' ? [KarixChannel::class] : ['mail'];
     }
 
     public function toKarix($notifiable)

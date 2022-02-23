@@ -21,6 +21,7 @@ Auth::routes();
 
 Route::get('verifyOTP', 'VerifyOTPController@showOTPForm')->name('otpPage');
 Route::post('verifyOTP', 'VerifyOTPController@verify')->name('submitOTP');
+Route::post('resendOTP', 'VerifyOTPController@resendOTP')->name('resendOTP');
 
 Route::group(['middleware' => 'TwoFactorAuth'], function () {
     Route::get('/home', 'HomeController@index')->name('home');

@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
 class UserTest extends TestCase
@@ -31,6 +32,33 @@ class UserTest extends TestCase
         $user = factory(User::class)->create();
         $user->sendOTP('email-otp');
         // $cUser = auth()->user;
-        dd(cache($user->otp()));
+        // dd(cache($user->otp()));
+    }
+
+    /**
+     *
+     * @test
+     *
+     */
+    public function reqNewOTP()
+    {
+        $this->logInUser();
+        $req = $this->post('/resendOTP', ['via' => 'email']);
+        $req->assertStatus(201);
+
+    }
+
+    /**
+     *
+     * @test
+     *
+     */
+    public function sendNewOTP()
+    {
+        Notification::fake();
+        $user = $this->logInUser();
+        $req = $this->post('/resendOTP', ['via' => 'sms']);
+        Notification::assertSentTo([$user], OTPNotification::class);
+
     }
 }
