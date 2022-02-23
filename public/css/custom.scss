@@ -1,0 +1,61 @@
+@import "./colors";
+
+// input[type="checkbox"]
+input[type="radio"] {
+    display: none; //hide by default
+    cursor: pointer; //make the cursor a pointer when over the items
+    &:focus,
+    &:active {
+        outline: none; //remove the annoying outline
+    }
+    & + label {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        padding-left: 25px;
+        margin-right: 10px;
+        color: darken($base, 20%);
+        &:before,
+        &:after {
+            content: "";
+            font-family: helvetica;
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            left: 0;
+            bottom: 0;
+            position: absolute;
+        }
+        &:before {
+            background-color: $whiteLight;
+            transition: all 0.3s ease-in-out;
+        }
+        &:after {
+            color: #fff;
+        }
+    }
+    &:checked + label:before {
+        box-shadow: inset 0 0 0 10px $base;
+    }
+}
+
+input[type="radio"] {
+    & + label:before {
+        border-radius: 50%;
+    }
+    & + label:hover:after,
+    &:checked + label:after {
+        content: "\2022";
+        position: absolute;
+        top: 0px;
+        font-size: 19px;
+        line-height: 15px;
+    }
+    & + label:hover:after {
+        color: darken($whiteLight, 20%);
+    }
+    &:checked + label:after,
+    &:checked + label:hover:after {
+        color: #fff;
+    }
+}

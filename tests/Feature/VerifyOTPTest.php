@@ -9,7 +9,7 @@ class VerifyOTPTest extends TestCase
     /**
      * A basic feature test example.
      *
-     * @test
+     * @tes
      *
      * @return void
      */
@@ -28,7 +28,7 @@ class VerifyOTPTest extends TestCase
 
     /**
      *
-     * @test
+     * @tes
      *
      *
      */
@@ -38,5 +38,29 @@ class VerifyOTPTest extends TestCase
         $this->get('/verifyOTP')
             ->assertStatus(200)
             ->assertSee('enter otp');
+    }
+
+    /**
+     *
+     * @test
+     *
+     */
+    public function handleInvalidOTP()
+    {
+        $this->logInUser();
+        $this->post('/verifyOTP', ['OTP' => 'InvalidOTP'])->assertSessionHasErrors();
+
+    }
+
+    /**
+     *
+     * @test
+     *
+     */
+    public function handleEmptyOTP()
+    {
+        $this->logInUser();
+        $this->post('/verifyOTP', ['OTP' => null])->assertSessionHasErrors();
+
     }
 }
